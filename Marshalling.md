@@ -1,6 +1,6 @@
 In HW4 you are expected to write the marshall() code that inserts data into a relation and stores it to disk.
 
-The data processor in insert_statement.py (line 50 and onward) expects a data datastream and a sometimes key datastream (as fields in the InsertRow class) that represent the data that will be written to disk.  Data has to be formatted in a particular way to be read correctly by the TableIterator when executing queries.
+The data processor in insert_statement.py (line 50 and onward) expects a data datastream and a sometimes key datastream (as fields in the InsertRow class) that represent the data that will be written to disk.  Data has to be formatted in a particular way to be read correctly by the TableIterator when executing queries. For HW4, I strongly encourage you (for your own sake) to use the DataOutputStream class in data_output_stream.py
 
 Hence, an inserted tuple must be marshalled into a format with a stream of int-values followed by a stream of bytes representing the non-key data. If a key exists, it is inserted separately.
 
