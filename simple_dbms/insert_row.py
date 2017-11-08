@@ -31,6 +31,55 @@ class InsertRow:
         :return:
         """
 
+        offset = 4 * (self._table.num_columns() + 1) # init offset
+        col = 0
+        self._data = DataOutputStream()
+
+        for val in self._values:
+            curr = self._table.get_column(col) # curr column accessing
+            if curr.is_primary_key():
+                code = -1
+                self._key = DataOutputStream()
+                self._data.write_int(offset_code)
+            elif type(val) == str:
+                self._data.write_int(offset)
+                offset += len(val) # inc. by str size
+
+            elif type(val) == int:
+                self._data.write_int(offset)
+                offset += 4 # inc. by int size
+
+            elif type(val) == float:
+                self._data.write_int(offset)
+                offset  += 8 # inc. by float size
+
+            else: #default
+                code = -2
+                self._data.write_int(code)
+
+            col += 1
+
+        col = 0 # back to start~
+
+        for val in self._values:
+            curr = self._table.get_column(col)
+
+            if curr.is_primary_key():
+                self._key.write_int(val)
+
+            if type(val) == str:
+                byteVal = bytearray(val)
+                for b in byteVal:
+                    self._data.write_byte(b)
+            elif type(val) == int:
+                self._data.write_int(val)
+            elif type(val) == float:
+                self._data.write_float(val)
+            else: # default
+                continue
+
+            col += 1
+
     def get_key(self):
         """
         Returns the key in the key/data pair for this row.
