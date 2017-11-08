@@ -48,7 +48,7 @@ class InsertStatement(SQLStatement, object):
             # Create an InsertRow object for the row to be inserted,
             # and use that object to marshall the row.
             row = InsertRow(table, adjusted_values)
-            row.marshall() #TODO HW4 This function needs to be implemented.
+            row.marshall()
 
             # Perform the insertion.
             ret = OperationStatus.SUCCESS
