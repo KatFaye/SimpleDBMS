@@ -40,7 +40,7 @@ class InsertRow:
             if curr.is_primary_key():
                 code = -1
                 self._key = DataOutputStream()
-                self._data.write_int(offset_code)
+                self._data.write_int(code)
             elif type(val) == str:
                 self._data.write_int(offset)
                 offset += len(val) # inc. by str size
